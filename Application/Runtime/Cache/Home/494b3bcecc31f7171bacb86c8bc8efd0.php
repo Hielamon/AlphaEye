@@ -20,7 +20,7 @@
 
   <!-- Custom styles for this template -->
   <link href="/AlphaEye/Public/css/common.css" rel="stylesheet" />
-  <link href="/AlphaEye/Public/css/questionnaire.css" rel="stylesheet">
+  <link href="/AlphaEye/Public/css/questionnaire.css?201709130257" rel="stylesheet">
 
   <script type="text/javascript" src="/AlphaEye/Public/assets/js/jquery-3.2.1.min.js"></script>
   <!--<script type="text/javascript" src="/AlphaEye/Public/assets/js/jquery-3.2.1.js"></script>-->
@@ -166,7 +166,6 @@
 
       EventUtil.addHandler(window, "load", function (event) {
           myData = JSON.parse(data);
-          alert(myData[0].QAName);
           constructFullTree(null, myData);
 
           //To get the QA divs
