@@ -13,7 +13,7 @@ class IndexController extends Controller {
         $this->assign('index_view',$this->view_urls['index_view'] );
 
         $this->view_urls['$login_view'] = U("user/login");
-        $this->assign('$login_view',$this->view_urls['$login_view'] );
+        $this->assign('login_view',$this->view_urls['$login_view'] );
 
         $this->view_urls['register_view'] = U("user/register");
         $this->assign('register_view',$this->view_urls['register_view'] );

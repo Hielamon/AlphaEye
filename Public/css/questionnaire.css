@@ -172,16 +172,40 @@ div.top-nav-profile:hover ul.top-nav-drop{
   margin-bottom: 0;
 }
 
-#current-QA, #previous-QA, #submit-div{
+#QA-div{
   text-align: left;
   margin-bottom: 3rem;
-  margin-left: 40%;
-  display:none;
   width: 50%;
 }
 
-#submit-div {
-  width: 20%;
+#current-QA, #controller-div, #submit-div{
+  text-align: left;
+  margin-bottom: 0;
+  display:none;
+  /*border: 1px solid red;*/
+}
+
+#submit-div{
+  text-align: center;
+  width: 90%;
+  /*border: 1px solid red;*/
+  margin-left: 0;
+}
+
+
+#previous-button, #next-button{
+  width: 40%;
+  margin-right: 10%;
+  margin-top: 0;
+  /*border: 1px solid red;*/
+}
+
+#warning-option, #warning-control{
+  display: block;
+  visibility: hidden;
+  color: red;
+  margin-bottom: 2rem;
+  margin-top: 0.5rem;
 }
 
 h4{
@@ -190,6 +214,8 @@ h4{
 
 h5{
   text-align: left;
+  margin-bottom: 1rem;
+  margin-left: -1.7rem;
 }
 
 label{
@@ -199,6 +225,7 @@ label{
 input{
   margin-left: 2rem;
 }
+
 
 ul.custom-radio .check{
   border: 5px solid #868e96;

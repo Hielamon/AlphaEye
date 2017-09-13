@@ -10,8 +10,9 @@
   <title>AlphaEye登录</title>
 
   <!-- Bootstrap core CSS -->
+  <link href="/AlphaEye/Public/assets/css/bootstrap.min.css" rel="stylesheet">
   <!--<link href="/AlphaEye/Public/assets/css/bootstrap.css" rel="stylesheet">-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
 
   <!-- Custom styles for this template -->
   <link href="/AlphaEye/Public/css/login.css" rel="stylesheet">
