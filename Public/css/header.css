@@ -1,0 +1,138 @@
+.header{
+    padding-right: 1rem;
+    padding-left: 1rem;
+    width: 100%;
+
+    padding-bottom: 0;
+    border-bottom: .05rem solid #e5e5e5;
+    overflow: visible;
+}
+
+.header h4 {
+    margin-top: .1rem;
+    margin-bottom: 0;
+    line-height: 2rem;
+    margin-right: 4rem;
+}
+
+.login, .register{
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+div.top-nav-profile{
+    position: relative;
+}
+
+div.top-nav-profile a:hover{
+    text-decoration: none;
+}
+
+div.top-nav-profile a{
+    color: black;
+}
+
+div.top-link-logo{
+    min-width: 7rem;
+    display: block;
+    margin: 1px;
+    margin-bottom: 0;
+    padding-right: 0.3rem;
+}
+
+a.top-link-logo{
+    min-width: 7rem;
+    display: block;
+}
+
+ul.top-nav-drop{
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding:0;
+}
+
+ul.top-nav-drop li{
+    border-bottom:1px solid #ddd;
+    /*margin-bottom:-1px;*/
+    padding-top: 0.6rem;
+    padding-left: 3.2rem;
+    height: 2.9rem;
+}
+
+ul.top-nav-drop li:last-child{
+    border-bottom:none;
+}
+
+ul.top-nav-drop li:hover{
+    background-color: #fefefe;
+}
+
+div.top-nav-profile:hover{
+    background-color: #f9f9f9;
+}
+
+.avatar{
+    width: 2.2rem;
+    height: 2.2rem;
+    margin: 0.4rem 0.4rem;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+li#li-profile{
+    background-image: url("../images/view/person.png");
+    background-repeat: no-repeat;
+    -webkit-background-size: 1.454rem 1.8rem;
+    background-size: 1.454rem 1.8rem;
+    background-position: 0.77rem 0.6rem;
+}
+
+li#li-medical-record{
+    background-image: url(../images/view/profile.png);
+    background-repeat: no-repeat;
+    -webkit-background-size: 1.8rem 1.286rem;
+    background-size: 1.8rem 1.286rem;
+    background-position: 0.6rem 0.85rem;
+}
+
+li#li-exit{
+    background-image: url(../images/view/exit.png);
+    background-repeat: no-repeat;
+    -webkit-background-size: 1.6rem 1.6rem;
+    background-size: 1.6rem 1.6rem;
+    background-position: 0.7rem 0.7rem;
+}
+
+div.top-nav-profile:hover div.top-link-logo{
+    border:1px solid #ddd;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+    margin: 0;
+    margin-bottom:-1px;
+    box-shadow: 0 0 2px #999999;
+}
+
+div.top-nav-profile:hover ul.top-nav-drop{
+    display: block;
+    width: 100%;
+    position: absolute;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    border-radius: 0.5rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: 0 2px 2px #999999;
+}
+
+@media screen and (min-width: 48em) {
+    .header{
+        padding-right: 0;
+        padding-left: 0;
+        margin-bottom: 2rem;
+    }
+}

@@ -1,0 +1,65 @@
+<div class="header clearfix">
+    <h4 class="text-muted float-left">AlphaEye</h4>
+    <nav>
+        <ul class="nav nav-pills float-left">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">首页 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">介绍</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">联系我们</a>
+            </li>
+        </ul>
+    </nav>
+
+    <empty name="name">
+        <nav>
+            <ul class="nav float-right">
+                <li class="login">
+                    <a class="btn btn-outline-primary" href="{$login_view}">登录</a>
+                </li>
+                <li class="register">
+                    <a class="btn btn-outline-primary" href="{$register_view}">注册</a>
+                </li>
+            </ul>
+        </nav>
+    <else />
+        <div class="top-nav-profile float-right">
+            <div class="top-link-logo">
+                <a href="#" class="top-link-logo">
+                    <img src="__PUBLIC__/images/avatar2.jpg" class="avatar"/>
+                    <span class="name">{$name}</span>
+                </a>
+            </div>
+
+            <ul class="top-nav-drop">
+                <li id="li-profile"><a href="#">个人资料</a></li>
+                <li id="li-medical-record"><a href="#">病历</a></li>
+                <li id="li-exit"><a href="{$index_view}">退出</a></li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="__PUBLIC__/js/common.js"></script>
+        <script type="application/javascript">
+            EventUtil.addHandler(window, "load", function () {
+                var existLiTag = document.getElementById("li-exit");
+                var existLinkTag = existLiTag.getElementsByTagName("a")[0];
+
+                EventUtil.addHandler(existLinkTag, "click", function () {
+                    var xhr = createXHR();
+                    xhr.open("POST", "{$index_view}", false);
+                    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    xhr.send("exist=");
+
+                    if((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304){
+                    }else {
+                        alert("No response from AlphaEye Server");
+                    }
+                })
+            })
+        </script>
+    </empty>
+
+</div><!-- navigator -->
+

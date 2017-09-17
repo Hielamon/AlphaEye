@@ -15,7 +15,11 @@
   <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
 
   <!-- Custom styles for this template -->
-  <link href="/AlphaEye/Public/css/index.css" rel="stylesheet">
+  <link href="/AlphaEye/Public/css/common.css?201709162348" rel="stylesheet">
+  <link href="/AlphaEye/Public/css/header.css?201709162348" rel="stylesheet">
+  <link href="/AlphaEye/Public/css/index.css?201709170034" rel="stylesheet">
+
+
 </head>
 <body>
 
@@ -23,30 +27,67 @@
   <div class="header clearfix">
     <h4 class="text-muted float-left">AlphaEye</h4>
     <nav>
-      <ul class="nav nav-pills float-left">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">首页 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">介绍</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">联系我们</a>
-        </li>
-      </ul>
+        <ul class="nav nav-pills float-left">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">首页 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">介绍</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">联系我们</a>
+            </li>
+        </ul>
     </nav>
 
-    <nav>
-      <ul class="nav float-right">
-        <li class="login">
-          <a class="btn btn-outline-primary" href="<?php echo ($login_view); ?>">登录</a>
-        </li>
-        <li class="register">
-          <a class="btn btn-outline-primary" href="<?php echo ($register_view); ?>">注册</a>
-        </li>
-      </ul>
-    </nav>
-  </div><!-- navigator -->
+    <?php if(empty($name)): ?><nav>
+            <ul class="nav float-right">
+                <li class="login">
+                    <a class="btn btn-outline-primary" href="<?php echo ($login_view); ?>">登录</a>
+                </li>
+                <li class="register">
+                    <a class="btn btn-outline-primary" href="<?php echo ($register_view); ?>">注册</a>
+                </li>
+            </ul>
+        </nav>
+    <?php else: ?>
+        <div class="top-nav-profile float-right">
+            <div class="top-link-logo">
+                <a href="#" class="top-link-logo">
+                    <img src="/AlphaEye/Public/images/avatar2.jpg" class="avatar"/>
+                    <span class="name"><?php echo ($name); ?></span>
+                </a>
+            </div>
+
+            <ul class="top-nav-drop">
+                <li id="li-profile"><a href="#">个人资料</a></li>
+                <li id="li-medical-record"><a href="#">病历</a></li>
+                <li id="li-exit"><a href="<?php echo ($index_view); ?>">退出</a></li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="/AlphaEye/Public/js/common.js"></script>
+        <script type="application/javascript">
+            EventUtil.addHandler(window, "load", function () {
+                var existLiTag = document.getElementById("li-exit");
+                var existLinkTag = existLiTag.getElementsByTagName("a")[0];
+
+                EventUtil.addHandler(existLinkTag, "click", function () {
+                    var xhr = createXHR();
+                    xhr.open("POST", "<?php echo ($index_view); ?>", false);
+                    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    xhr.send("exist=");
+
+                    if((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304){
+                    }else {
+                        alert("No response from AlphaEye Server");
+                    }
+                })
+            })
+        </script><?php endif; ?>
+
+</div><!-- navigator -->
+
+
 
   <div class="jumbotron">
     <h2 >AlphaEye数据采集平台</h2>
@@ -64,6 +105,10 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--load the js files-->
+<script type="text/javascript" src="/AlphaEye/Public/assets/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/AlphaEye/Public/js/common.js"></script>
 <script src="/AlphaEye/Public/assets/js/ie10-viewport-bug-workaround.js"></script>
+
 </body>
 </html>

@@ -77,3 +77,62 @@ function createXHR() {
     throw new Error("No XHR object available.");
   }
 }
+
+//node is a JQuery Node , text is the warning text which add after the node
+function addWarning(node, text, borderColor) {
+//            alert(text);
+    var waringTag = $("<span></span>").text(text);
+    waringTag.css({"color" : "#CC3333", "position": "absolute", "font-size" : "0.7rem"});
+    node.after(waringTag);
+    if(arguments.length >= 3){
+        node.css("border-color" , borderColor);
+    }
+}
+
+function addWarningInner(node, text, align) {
+    var waringTag = $("<span></span>").text(text);
+    waringTag.css({"color" : "#CC3333", "position": "absolute"});
+    if(arguments.length >= 3){
+        waringTag.css("text-align", align);
+    }
+
+    waringTag.css("line-height", node.css("line-height"));
+    waringTag.css("pointer-events", "none");
+    node.css("border-color" , "red");
+
+    var paddingLeft = parseFloat(node.css("padding-left"));
+    var paddingTop = parseFloat(node.css("padding-top"));
+    var borderWidth = parseFloat(node.css("border-width"));
+
+    var leftDistant = paddingLeft;
+    leftDistant += borderWidth;
+    leftDistant += parseFloat(node.css("margin-left"));
+    leftDistant += parseFloat(node.parent().css("padding-left"));
+
+    var topDistant = paddingTop;
+    topDistant += borderWidth;
+    topDistant += parseFloat(node.css("margin-top"));
+    topDistant += parseFloat(node.parent().css("padding-top"));
+
+    var waringWidth = parseFloat(node.css("width"));
+    waringWidth -= (2 * borderWidth);
+    waringWidth -= (2 * paddingLeft);
+    waringTag.css("width", (waringWidth + "px"));
+
+    waringTag[0].style.left = (leftDistant + "px");
+    waringTag[0].style.top = (topDistant + "px");
+    node.after(waringTag);
+}
+
+function removeWarningHandler(event) {
+    event = EventUtil.getEvent(event);
+    var target = EventUtil.getTarget(event);
+    $(target).siblings("span").remove();
+}
+
+function removeWarningColorHandler(event) {
+    event = EventUtil.getEvent(event);
+    var target = EventUtil.getTarget(event);
+    target.style.borderColor = "#80bdff";
+    $(target).siblings("span").remove();
+}

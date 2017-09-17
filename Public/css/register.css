@@ -1,42 +1,8 @@
 
-/* Space out content a bit */
-body {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-
 /* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
 .footer {
   padding-right: 1rem;
   padding-left: 1rem;
-}
-
-/* Custom page header */
-.header {
-  padding-bottom: 1rem;
-  border-bottom: .05rem solid #e5e5e5;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h4 {
-  margin-top: .1rem;
-  margin-bottom: 0;
-  line-height: 2rem;
-  margin-right: 4rem;
-  /*border: medium solid rgb(255,0,0);*/
-}
-
-/* Customize container */
-@media (min-width: 60em) {
-  .container {
-    max-width: 60rem;
-  }
-}
-
-/*The style for sign in and sign up in the header*/
-.login, .register{
-  margin-left: 1rem;
 }
 
 .div-signup{
@@ -105,6 +71,10 @@ li.current .small-icon{
   fill: #0366D6;
 }
 
+.form-control:focus {
+  z-index: 2;
+}
+
 /*the style for creating user*/
 .form-create{
   max-width: 20rem;
@@ -113,8 +83,6 @@ li.current .small-icon{
   margin-left: 0.2rem;
   display: block;
 }
-
-
 
 /*the style for choosing user type*/
 .form-choose-type{
@@ -184,6 +152,10 @@ li.current .small-icon{
   line-height: 1.25;
 }
 
+/*.col-sm-10{*/
+  /*position: relative;*/
+/*}*/
+
 .require-star{
   color: red;
 }
@@ -192,17 +164,12 @@ li.current .small-icon{
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 48em) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
+
   .footer {
     padding-right: 0;
     padding-left: 0;
   }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 2rem;
-  }
+
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;

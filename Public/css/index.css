@@ -1,26 +1,7 @@
-body {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-
-.header,
 .footer {
   padding-right: 1rem;
   padding-left: 1rem;
   width: 100%;
-}
-
-.header {
-  padding-bottom: 1rem;
-  border-bottom: .05rem solid #e5e5e5;
-  overflow: hidden;
-}
-
-.header h4 {
-  margin-top: .1rem;
-  margin-bottom: 0;
-  line-height: 2rem;
-  margin-right: 4rem;
 }
 
 .footer {
@@ -30,16 +11,6 @@ body {
   text-align: center;
 }
 
-@media (min-width: 60em) {
-  .container {
-    max-width: 60rem;
-  }
-}
-
-.login, .register{
-  margin-left: 1rem;
-}
-
 .jumbotron {
   text-align: center;
   border-bottom: .05rem solid #e5e5e5;
@@ -47,18 +18,14 @@ body {
 .jumbotron .btn {
   padding: .75rem 1.5rem;
   font-size: 1.5rem;
-
 }
 
 @media screen and (min-width: 48em) {
-  .header,
   .footer {
     padding-right: 0;
     padding-left: 0;
   }
-  .header {
-    margin-bottom: 2rem;
-  }
+
   .jumbotron {
     border-bottom: 0;
   }

@@ -20,220 +20,8 @@
 
   <!-- Custom styles for this template -->
   <link href="/AlphaEye/Public/css/common.css" rel="stylesheet" />
+  <link href="/AlphaEye/Public/css/header.css?201709162348" rel="stylesheet">
   <link href="/AlphaEye/Public/css/questionnaire.css?201709130257" rel="stylesheet">
-
-  <script type="text/javascript" src="/AlphaEye/Public/assets/js/jquery-3.2.1.min.js"></script>
-  <!--<script type="text/javascript" src="/AlphaEye/Public/assets/js/jquery-3.2.1.js"></script>-->
-  <script type="text/javascript" src="/AlphaEye/Public/js/common.js"></script>
-  <script type="text/javascript" src="/AlphaEye/Public/js/questionnaire.js"></script>
-  <script type="text/javascript">
-      function constructFullTree(parent, root) {
-          if (root instanceof Array){
-              var i = 0, j = 0, curNode, childQAList, curChildQA;
-              for(i = 0; i < root.length; i++){
-                  curNode = root[i];
-                  curNode.parent = parent;
-                  curNode.asked = false;
-                  curNode.checkIdx = -1;
-                  if(i === (root.length - 1)){
-                      curNode.next = null;
-                  }
-                  else{
-                      curNode.next = root[i+1];
-                  }
-
-                  childQAList = root[i].childQA;
-                  for(j = 0; j < childQAList.length; j++){
-                      curChildQA = childQAList[j];
-                      arguments.callee(curNode, curChildQA);
-                  }
-              }
-          }
-          else{
-//        alert("endPoint");
-          }
-      }
-
-      function clickHidden(event){
-          event = EventUtil.getEvent();
-          var target = EventUtil.getTarget(event);
-          target.style.display = "none";
-      }
-
-      var myData, currentQANode = null;
-      var stackQANode = [];
-
-      var currentQADivTag = null, controllerDivTag = null, currentQATitleTag = null;
-
-      var previousButtonTag = null, nextButtonTag = null, submitDiv = null;
-      var warningOption = null, warningControl = null;
-
-      function findNextQANode(currentNode, idxChoose) {
-          var nextQANode = currentNode.childQA[idxChoose];
-          if(!(nextQANode instanceof Array)){
-              //find next sibling node
-              nextQANode = currentNode.next;
-              if(nextQANode === null){
-                  //find a predecessor which has a nonempty next
-                  var parentNode = currentNode.parent;
-
-                  while (parentNode !== null && parentNode.next === null){
-                      parentNode = parentNode.parent;
-                  }
-
-                  if(parentNode !== null){
-                      nextQANode = parentNode.next;
-                  }
-              }
-          }else{
-              nextQANode = nextQANode[0];
-          }
-          return nextQANode;
-      }
-
-      function QAClickHandler(event) {
-          event = EventUtil.getEvent();
-          var target = EventUtil.getTarget(event);
-          var id = target.id;
-          var idx = id.slice(id.indexOf("option-") + 7, id.length);
-          idx = parseInt(idx);
-
-          currentQANode.asked = true;
-          if(currentQANode.checkIdx !== -1){
-              submitDiv.style.display = "none";
-          }
-          currentQANode.checkIdx = idx;
-
-          warningOption.style.visibility = "hidden";
-      }
-
-      function showQAInDiv(QANode, divNode, divTitleNode, clickHandler) {
-          $(divNode).hide();
-          var ul = $(divNode).children(".custom-radio");
-
-          divTitleNode.innerHTML = (stackQANode.length + 1).toString() + "，" + QANode.QAName;
-          var inputTags = divNode.getElementsByTagName("input");
-          var labelTags = divNode.getElementsByTagName("label");
-          var existedLength = inputTags.length;
-          //TODO: check the length equality of inputTags and labelTags
-          var newInputTag, newLabelTag;
-          for(var i = 0; i < QANode.options.length; i++){
-              if(i >= existedLength){
-                  //create new input and label
-                  newInputTag = document.createElement("input");
-                  newLabelTag = document.createElement("label");
-                  newInputTag.id = divNode.id + "-option-" + i;
-                  newInputTag.type = "radio";
-                  newInputTag.name = divNode.id + "-option";
-                  newInputTag.style.display = "inline-block";
-                  inputTags[i] = newInputTag;
-
-                  EventUtil.addHandler(newInputTag, "click", clickHandler);
-
-                  newLabelTag.htmlFor = newInputTag.id;
-                  newLabelTag.innerHTML = QANode.options[i];
-                  newLabelTag.style.display = "inline-block";
-//          labelTags[i] = newLabelTag;
-                  var li = $("<li><div class='check'></div></li>");
-                  li.prepend(newInputTag, newLabelTag);
-                  ul.append(li);
-              }
-              else if(i < existedLength){
-                  inputTags[i].checked = false;
-                  inputTags[i].style.display = "inline-block";
-
-                  labelTags[i].innerHTML = QANode.options[i];
-                  labelTags[i].style.display = "inline-block";
-              }
-          }
-
-          if(i < existedLength){
-              for(var j = i; j < existedLength; j++){
-                  $(inputTags[j]).parent().hide();
-//          inputTags[j].style.display = "none";
-//          labelTags[j].style.display = "none";
-              }
-          }
-
-          //TODO:check the checkIdx more
-          if(QANode.checkIdx !== -1){
-              inputTags[QANode.checkIdx].checked = true;
-          }
-
-          $(divNode).fadeIn(300);
-
-      }
-
-      EventUtil.addHandler(window, "load", function (event) {
-          myData = JSON.parse(data);
-          constructFullTree(null, myData);
-
-          //To get the QA divs
-          //TODO: maybe need to check the existence
-          currentQADivTag = document.getElementById("current-QA");
-          currentQATitleTag = currentQADivTag.getElementsByTagName("h5")[0];
-
-          controllerDivTag = document.getElementById("controller-div");
-
-          function showFirstQA(myData) {
-              //TODO:need the safe check
-              currentQANode = myData[0];
-              showQAInDiv(currentQANode, currentQADivTag, currentQATitleTag, QAClickHandler);
-              $(controllerDivTag).fadeIn(300);
-          }
-
-          var startATag = document.getElementById("start-button");
-          function clickStartHandler(event) {
-              clickHidden(event);
-              showFirstQA(myData);
-          }
-          EventUtil.addHandler(startATag, "click", clickStartHandler);
-
-          previousButtonTag = document.getElementById("previous-button");
-          warningOption = document.getElementById("warning-option");
-          warningControl = document.getElementById("warning-control");
-          submitDiv = document.getElementById("submit-div");
-
-          EventUtil.addHandler(previousButtonTag, "click", function () {
-              warningOption.style.visibility = "hidden";
-
-              if(stackQANode.length !== 0){
-                  warningControl.style.visibility = "hidden";
-                  currentQANode = stackQANode[stackQANode.length - 1];
-                  stackQANode.length--;
-                  showQAInDiv(currentQANode, currentQADivTag, currentQATitleTag, QAClickHandler);
-              }
-              else {
-                  warningControl.style.visibility = "visible";
-                  warningControl.innerHTML = "*这已经是第一题，没有上一题了*";
-              }
-          });
-
-          nextButtonTag = document.getElementById("next-button");
-          EventUtil.addHandler(nextButtonTag, "click", function () {
-              warningControl.style.visibility = "hidden";
-              if(currentQANode.checkIdx === -1){
-                  warningOption.style.visibility = "visible";
-              }
-              else {
-                  var nextQANode = findNextQANode(currentQANode, currentQANode.checkIdx);
-                  if (nextQANode !== null) {
-                      stackQANode[stackQANode.length] = currentQANode;
-                      currentQANode = nextQANode;
-                      showQAInDiv(currentQANode, currentQADivTag, currentQATitleTag, QAClickHandler);
-                  }
-                  else {
-                      submitDiv.style.display = "block";
-                      warningControl.style.visibility = "visible";
-                      warningControl.innerHTML = "*这已经是最后一题，确认无误后可直接提交*";
-                  }
-              }
-
-          });
-
-      })
-
-  </script>
 
 </head>
 <body>
@@ -242,37 +30,67 @@
   <div class="header clearfix">
     <h4 class="text-muted float-left">AlphaEye</h4>
     <nav>
-      <ul class="nav nav-pills float-left">
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo ($index_view); ?>">首页 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">介绍</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">联系我们</a>
-        </li>
-      </ul>
+        <ul class="nav nav-pills float-left">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">首页 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">介绍</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">联系我们</a>
+            </li>
+        </ul>
     </nav>
 
-    <div class="top-nav-profile float-right">
-      <div class="top-link-logo">
-        <a href="#" class="top-link-logo">
-          <img src="/AlphaEye/Public/images/avatar2.jpg" class="avatar"/>
-          <span class="name">用户名</span>
-        </a>
-      </div>
+    <?php if(empty($name)): ?><nav>
+            <ul class="nav float-right">
+                <li class="login">
+                    <a class="btn btn-outline-primary" href="<?php echo ($login_view); ?>">登录</a>
+                </li>
+                <li class="register">
+                    <a class="btn btn-outline-primary" href="<?php echo ($register_view); ?>">注册</a>
+                </li>
+            </ul>
+        </nav>
+    <?php else: ?>
+        <div class="top-nav-profile float-right">
+            <div class="top-link-logo">
+                <a href="#" class="top-link-logo">
+                    <img src="/AlphaEye/Public/images/avatar2.jpg" class="avatar"/>
+                    <span class="name"><?php echo ($name); ?></span>
+                </a>
+            </div>
 
-      <ul class="top-nav-drop">
-        <li id="li-profile"><a href="#">个人资料</a></li>
-        <li id="li-medical-record"><a href="#">病历</a></li>
-        <li id="li-exit"><a href="<?php echo ($index_view); ?>">退出</a></li>
-      </ul>
+            <ul class="top-nav-drop">
+                <li id="li-profile"><a href="#">个人资料</a></li>
+                <li id="li-medical-record"><a href="#">病历</a></li>
+                <li id="li-exit"><a href="<?php echo ($index_view); ?>">退出</a></li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="/AlphaEye/Public/js/common.js"></script>
+        <script type="application/javascript">
+            EventUtil.addHandler(window, "load", function () {
+                var existLiTag = document.getElementById("li-exit");
+                var existLinkTag = existLiTag.getElementsByTagName("a")[0];
 
-    </div>
+                EventUtil.addHandler(existLinkTag, "click", function () {
+                    var xhr = createXHR();
+                    xhr.open("POST", "<?php echo ($index_view); ?>", false);
+                    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    xhr.send("exist=");
+
+                    if((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304){
+                    }else {
+                        alert("No response from AlphaEye Server");
+                    }
+                })
+            })
+        </script><?php endif; ?>
+
+</div><!-- navigator -->
 
 
-  </div><!-- navigator -->
 
   <div class="jumbotron">
     <h4>请根据您的症状，回答下列问题</h4>
@@ -310,6 +128,219 @@
     </div>
   </div>
 </div>
+
+<!--load the js files-->
+<script type="text/javascript" src="/AlphaEye/Public/assets/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/AlphaEye/Public/js/common.js"></script>
+<script type="text/javascript" src="/AlphaEye/Public/js/questionnaire.js"></script>
+<script type="text/javascript">
+    function constructFullTree(parent, root) {
+        if (root instanceof Array){
+            var i = 0, j = 0, curNode, childQAList, curChildQA;
+            for(i = 0; i < root.length; i++){
+                curNode = root[i];
+                curNode.parent = parent;
+                curNode.asked = false;
+                curNode.checkIdx = -1;
+                if(i === (root.length - 1)){
+                    curNode.next = null;
+                }
+                else{
+                    curNode.next = root[i+1];
+                }
+
+                childQAList = root[i].childQA;
+                for(j = 0; j < childQAList.length; j++){
+                    curChildQA = childQAList[j];
+                    arguments.callee(curNode, curChildQA);
+                }
+            }
+        }
+        else{
+//        alert("endPoint");
+        }
+    }
+
+    function clickHidden(event){
+        event = EventUtil.getEvent();
+        var target = EventUtil.getTarget(event);
+        target.style.display = "none";
+    }
+
+    var myData, currentQANode = null;
+    var stackQANode = [];
+
+    var currentQADivTag = null, controllerDivTag = null, currentQATitleTag = null;
+
+    var previousButtonTag = null, nextButtonTag = null, submitDiv = null;
+    var warningOption = null, warningControl = null;
+
+    function findNextQANode(currentNode, idxChoose) {
+        var nextQANode = currentNode.childQA[idxChoose];
+        if(!(nextQANode instanceof Array)){
+            //find next sibling node
+            nextQANode = currentNode.next;
+            if(nextQANode === null){
+                //find a predecessor which has a nonempty next
+                var parentNode = currentNode.parent;
+
+                while (parentNode !== null && parentNode.next === null){
+                    parentNode = parentNode.parent;
+                }
+
+                if(parentNode !== null){
+                    nextQANode = parentNode.next;
+                }
+            }
+        }else{
+            nextQANode = nextQANode[0];
+        }
+        return nextQANode;
+    }
+
+    function QAClickHandler(event) {
+        event = EventUtil.getEvent();
+        var target = EventUtil.getTarget(event);
+        var id = target.id;
+        var idx = id.slice(id.indexOf("option-") + 7, id.length);
+        idx = parseInt(idx);
+
+        currentQANode.asked = true;
+        if(currentQANode.checkIdx !== -1){
+            submitDiv.style.display = "none";
+        }
+        currentQANode.checkIdx = idx;
+
+        warningOption.style.visibility = "hidden";
+    }
+
+    function showQAInDiv(QANode, divNode, divTitleNode, clickHandler) {
+        $(divNode).hide();
+        var ul = $(divNode).children(".custom-radio");
+
+        divTitleNode.innerHTML = (stackQANode.length + 1).toString() + "，" + QANode.QAName;
+        var inputTags = divNode.getElementsByTagName("input");
+        var labelTags = divNode.getElementsByTagName("label");
+        var existedLength = inputTags.length;
+        //TODO: check the length equality of inputTags and labelTags
+        var newInputTag, newLabelTag;
+        for(var i = 0; i < QANode.options.length; i++){
+            if(i >= existedLength){
+                //create new input and label
+                newInputTag = document.createElement("input");
+                newLabelTag = document.createElement("label");
+                newInputTag.id = divNode.id + "-option-" + i;
+                newInputTag.type = "radio";
+                newInputTag.name = divNode.id + "-option";
+                newInputTag.style.display = "inline-block";
+                inputTags[i] = newInputTag;
+
+                EventUtil.addHandler(newInputTag, "click", clickHandler);
+
+                newLabelTag.htmlFor = newInputTag.id;
+                newLabelTag.innerHTML = QANode.options[i];
+                newLabelTag.style.display = "inline-block";
+//          labelTags[i] = newLabelTag;
+                var li = $("<li><div class='check'></div></li>");
+                li.prepend(newInputTag, newLabelTag);
+                ul.append(li);
+            }
+            else if(i < existedLength){
+                inputTags[i].checked = false;
+                inputTags[i].style.display = "inline-block";
+
+                labelTags[i].innerHTML = QANode.options[i];
+                labelTags[i].style.display = "inline-block";
+            }
+        }
+
+        if(i < existedLength){
+            for(var j = i; j < existedLength; j++){
+                $(inputTags[j]).parent().hide();
+//          inputTags[j].style.display = "none";
+//          labelTags[j].style.display = "none";
+            }
+        }
+
+        //TODO:check the checkIdx more
+        if(QANode.checkIdx !== -1){
+            inputTags[QANode.checkIdx].checked = true;
+        }
+
+        $(divNode).fadeIn(300);
+
+    }
+
+    EventUtil.addHandler(window, "load", function (event) {
+        myData = JSON.parse(data);
+        constructFullTree(null, myData);
+
+        //To get the QA divs
+        //TODO: maybe need to check the existence
+        currentQADivTag = document.getElementById("current-QA");
+        currentQATitleTag = currentQADivTag.getElementsByTagName("h5")[0];
+
+        controllerDivTag = document.getElementById("controller-div");
+
+        function showFirstQA(myData) {
+            //TODO:need the safe check
+            currentQANode = myData[0];
+            showQAInDiv(currentQANode, currentQADivTag, currentQATitleTag, QAClickHandler);
+            $(controllerDivTag).fadeIn(300);
+        }
+
+        var startATag = document.getElementById("start-button");
+        function clickStartHandler(event) {
+            clickHidden(event);
+            showFirstQA(myData);
+        }
+        EventUtil.addHandler(startATag, "click", clickStartHandler);
+
+        previousButtonTag = document.getElementById("previous-button");
+        warningOption = document.getElementById("warning-option");
+        warningControl = document.getElementById("warning-control");
+        submitDiv = document.getElementById("submit-div");
+
+        EventUtil.addHandler(previousButtonTag, "click", function () {
+            warningOption.style.visibility = "hidden";
+
+            if(stackQANode.length !== 0){
+                warningControl.style.visibility = "hidden";
+                currentQANode = stackQANode[stackQANode.length - 1];
+                stackQANode.length--;
+                showQAInDiv(currentQANode, currentQADivTag, currentQATitleTag, QAClickHandler);
+            }
+            else {
+                warningControl.style.visibility = "visible";
+                warningControl.innerHTML = "*这已经是第一题，没有上一题了*";
+            }
+        });
+
+        nextButtonTag = document.getElementById("next-button");
+        EventUtil.addHandler(nextButtonTag, "click", function () {
+            warningControl.style.visibility = "hidden";
+            if(currentQANode.checkIdx === -1){
+                warningOption.style.visibility = "visible";
+            }
+            else {
+                var nextQANode = findNextQANode(currentQANode, currentQANode.checkIdx);
+                if (nextQANode !== null) {
+                    stackQANode[stackQANode.length] = currentQANode;
+                    currentQANode = nextQANode;
+                    showQAInDiv(currentQANode, currentQADivTag, currentQATitleTag, QAClickHandler);
+                }
+                else {
+                    submitDiv.style.display = "block";
+                    warningControl.style.visibility = "visible";
+                    warningControl.innerHTML = "*这已经是最后一题，确认无误后可直接提交*";
+                }
+            }
+
+        });
+
+    })
+
+</script>
 
 </body>
 </html>

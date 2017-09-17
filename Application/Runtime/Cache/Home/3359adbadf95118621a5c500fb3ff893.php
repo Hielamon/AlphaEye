@@ -15,82 +15,10 @@
   <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
 
   <!-- Custom styles for this template -->
-  <link href="/AlphaEye/Public/css/common.css" rel="stylesheet" />
+  <link href="/AlphaEye/Public/css/common.css?201709162348" rel="stylesheet" />
+  <link href="/AlphaEye/Public/css/header.css?201709162348" rel="stylesheet">
   <link href="/AlphaEye/Public/css/register.css" rel="stylesheet">
 
-  <script type="text/javascript" src="/AlphaEye/Public/assets/js/jquery-3.2.1.min.js"></script>
-  <!--<script type="text/javascript" src="/AlphaEye/Public/assets/js/jquery-3.2.1.js"></script>-->
-
-  <script type="text/javascript" src="/AlphaEye/Public/js/common.js?t=201709110113"></script>
-  <script type="text/javascript">
-    EventUtil.addHandler(window, "load", function (event) {
-      var createForm = document.getElementsByClassName("form-create")[0];
-      var chooseForm = document.getElementsByClassName("form-choose-type")[0];
-      var detailForm = document.getElementsByClassName("form-detail")[0];
-      var step1Tag = document.getElementById("step-one");
-      var step2Tag = document.getElementById("step-two");
-      var step3Tag = document.getElementById("step-three");
-
-      var createButton = document.getElementById("create-button");
-      var chooseButton = document.getElementById("choose-button");
-      var signUpButton = document.getElementById("sign-up-button");
-
-      EventUtil.addHandler(createButton, "click", function (event) {
-          EventUtil.preventDefault(event);
-
-          if($("#inputUserName").value === ""){
-              alert("empty username");
-          }
-
-          createForm.style.display = "none";
-          chooseForm.style.display = "block";
-          step1Tag.className = "";
-          step2Tag.className = "current";
-
-//          var xhr = createXHR();
-//          xhr.open("POST", "<?php echo ($register_view); ?>", false);
-//          xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-//          xhr.send($(createForm).serialize() + "&create-button=");
-//
-//          if((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304){
-//
-//          }else {
-//              alert("No response from AlphaEye Server");
-//          }
-
-      });
-
-      EventUtil.addHandler(chooseButton, "click", function (event) {
-        EventUtil.preventDefault(event);
-        chooseForm.style.display = "none";
-        detailForm.style.display = "block";
-        step2Tag.className = "";
-        step3Tag.className = "current";
-      });
-
-      EventUtil.addHandler(signUpButton, "click", function (event) {
-        EventUtil.preventDefault(event);
-        window.location.href = "<?php echo ($questionnaire_view); ?>";
-      });
-
-//      Ajax session
-      var userNameTag = document.getElementById("inputUserName");
-//      EventUtil.addHandler(userNameTag, "blur", function (event) {
-//          event = EventUtil.getEvent(event);
-//          var target = EventUtil.getTarget(event);
-//          if(target.value !== ""){
-//              var xrh = createXHR();
-//              xrh.open("POST", "<?php echo ($register_view); ?>", false);
-//              xrh.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-//              xrh.send(target.name + "=" + target.value);
-//
-//              alert(xrh.responseText);
-//
-//          }
-//      });
-
-    })
-  </script>
 </head>
 
 <body>
@@ -99,30 +27,66 @@
   <div class="header clearfix">
     <h4 class="text-muted float-left">AlphaEye</h4>
     <nav>
-      <ul class="nav nav-pills float-left">
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo ($index_view); ?>">首页 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">介绍</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">联系我们</a>
-        </li>
-      </ul>
+        <ul class="nav nav-pills float-left">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">首页 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">介绍</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">联系我们</a>
+            </li>
+        </ul>
     </nav>
 
-    <nav>
-      <ul class="nav float-right">
-        <li class="login">
-          <a class="btn btn-outline-primary" href="<?php echo ($login_view); ?>">登录</a>
-        </li>
-        <li class="register">
-          <a class="btn btn-outline-primary" href="<?php echo ($register_view); ?>">注册</a>
-        </li>
-      </ul>
-    </nav>
-  </div><!-- navigator -->
+    <?php if(empty($name)): ?><nav>
+            <ul class="nav float-right">
+                <li class="login">
+                    <a class="btn btn-outline-primary" href="<?php echo ($login_view); ?>">登录</a>
+                </li>
+                <li class="register">
+                    <a class="btn btn-outline-primary" href="<?php echo ($register_view); ?>">注册</a>
+                </li>
+            </ul>
+        </nav>
+    <?php else: ?>
+        <div class="top-nav-profile float-right">
+            <div class="top-link-logo">
+                <a href="#" class="top-link-logo">
+                    <img src="/AlphaEye/Public/images/avatar2.jpg" class="avatar"/>
+                    <span class="name"><?php echo ($name); ?></span>
+                </a>
+            </div>
+
+            <ul class="top-nav-drop">
+                <li id="li-profile"><a href="#">个人资料</a></li>
+                <li id="li-medical-record"><a href="#">病历</a></li>
+                <li id="li-exit"><a href="<?php echo ($index_view); ?>">退出</a></li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="/AlphaEye/Public/js/common.js"></script>
+        <script type="application/javascript">
+            EventUtil.addHandler(window, "load", function () {
+                var existLiTag = document.getElementById("li-exit");
+                var existLinkTag = existLiTag.getElementsByTagName("a")[0];
+
+                EventUtil.addHandler(existLinkTag, "click", function () {
+                    var xhr = createXHR();
+                    xhr.open("POST", "<?php echo ($index_view); ?>", false);
+                    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    xhr.send("exist=");
+
+                    if((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304){
+                    }else {
+                        alert("No response from AlphaEye Server");
+                    }
+                })
+            })
+        </script><?php endif; ?>
+
+</div><!-- navigator -->
+
 
   <div class="container div-signup">
     <h2>注册一个AlphaEye用户</h2>
@@ -179,7 +143,7 @@
     <form class="form-choose-type">
       <ul class="custom-radio">
         <li>
-          <input type="radio" id="user-option" name="user-type" checked class="">
+          <input type="radio" id="user-option" name="user-type" checked value="普通用户" class="">
           <label for="user-option">
             <svg x="0px" y="0px" viewBox="0 0 24 24" height="56" width="56" class="float-left">
               <ellipse cx="12" cy="8" rx="5" ry="6"/>
@@ -191,7 +155,7 @@
           <div class="check"></div>
         </li>
         <li>
-          <input type="radio" id="doctor-option" name="user-type" class="" >
+          <input type="radio" id="doctor-option" name="user-type" value="医生" class="" >
           <label for="doctor-option">
             <svg x="0px" y="0px" viewBox="0 0 100 100" height="56" width="56" class="float-left">
               <g transform="translate(0,-952.36218)">
@@ -218,7 +182,7 @@
           <span class="require-star">*</span>
         </div>
         <div class="col-sm-10">
-          <input type="text" id="real-name" class="form-control" placeholder="请输入真实姓名" required autofocus />
+          <input type="text" id="real-name" class="form-control" placeholder="请输入真实姓名" name="real-name" required autofocus />
         </div>
       </div>
 
@@ -231,12 +195,12 @@
           <ul class="custom-radio">
             <li>
               <label for="male">男</label>
-              <input type="radio" name="gender" id="male" />
+              <input type="radio" name="gender" id="male" value="男"/>
               <div class="check"></div>
             </li>
             <li>
               <label for="female">女</label>
-              <input type="radio" name="gender" id="female" />
+              <input type="radio" name="gender" id="female" value="女"/>
               <div class="check"></div>
             </li>
           </ul>
@@ -249,7 +213,7 @@
           <span class="require-star">*</span>
         </div>
         <div class="col-sm-10">
-          <input type="number" id="age" class="form-control" required>
+          <input type="number" id="age" class="form-control" name="age" required>
         </div>
       </div>
 
@@ -259,63 +223,63 @@
           <span class="require-star">*</span>
         </div>
         <div class="col-sm-10">
-          <select name="nation" id="ethnic" class="form-control">
-            <option value="1">汉族</option>
-            <option value="2">蒙古族</option>
-            <option value="3">回族</option>
-            <option value="4">藏族</option>
-            <option value="5">维吾尔族</option>
-            <option value="6">苗族</option>
-            <option value="7">彝族</option>
-            <option value="8">壮族</option>
-            <option value="9">布依族</option>
-            <option value="10">朝鲜族</option>
-            <option value="11">满族</option>
-            <option value="12">侗族</option>
-            <option value="13">瑶族</option>
-            <option value="14">白族</option>
-            <option value="15">土家族</option>
-            <option value="16">哈尼族</option>
-            <option value="17">哈萨克族</option>
-            <option value="18">傣族</option>
-            <option value="19">黎族</option>
-            <option value="20">傈僳族</option>
-            <option value="21">佤族</option>
-            <option value="22">畲族</option>
-            <option value="23">高山族</option>
-            <option value="24">拉祜族</option>
-            <option value="25">水族</option>
-            <option value="26">东乡族</option>
-            <option value="27">纳西族</option>
-            <option value="28">景颇族</option>
-            <option value="29">柯尔克孜族</option>
-            <option value="30">土族</option>
-            <option value="31">达斡尔族</option>
-            <option value="32">仫佬族</option>
-            <option value="33">羌族</option>
-            <option value="34">布朗族</option>
-            <option value="35">撒拉族</option>
-            <option value="36">毛南族</option>
-            <option value="37">仡佬族</option>
-            <option value="38">锡伯族</option>
-            <option value="39">阿昌族</option>
-            <option value="40">普米族</option>
-            <option value="41">塔吉克族</option>
-            <option value="42">怒族</option>
-            <option value="43">乌孜别克族</option>
-            <option value="44">俄罗斯族</option>
-            <option value="45">鄂温克族</option>
-            <option value="46">德昂族</option>
-            <option value="47">保安族</option>
-            <option value="48">裕固族</option>
-            <option value="49">京族</option>
-            <option value="50">塔塔尔族</option>
-            <option value="51">独龙族</option>
-            <option value="52">鄂伦春族</option>
-            <option value="53">赫哲族</option>
-            <option value="54">门巴族</option>
-            <option value="55">珞巴族</option>
-            <option value="56">基诺族</option>
+          <select name="ethnic" id="ethnic" class="form-control">
+            <option value="汉族">汉族</option>
+            <option value="蒙古族">蒙古族</option>
+            <option value="回族">回族</option>
+            <option value="藏族">藏族</option>
+            <option value="维吾尔族">维吾尔族</option>
+            <option value="苗族">苗族</option>
+            <option value="彝族">彝族</option>
+            <option value="壮族">壮族</option>
+            <option value="布依族">布依族</option>
+            <option value="朝鲜族">朝鲜族</option>
+            <option value="满族">满族</option>
+            <option value="侗族">侗族</option>
+            <option value="瑶族">瑶族</option>
+            <option value="白族">白族</option>
+            <option value="土家族">土家族</option>
+            <option value="哈尼族">哈尼族</option>
+            <option value="哈萨克族">哈萨克族</option>
+            <option value="傣族">傣族</option>
+            <option value="黎族">黎族</option>
+            <option value="傈僳族">傈僳族</option>
+            <option value="佤族">佤族</option>
+            <option value="畲族">畲族</option>
+            <option value="高山族">高山族</option>
+            <option value="拉祜族">拉祜族</option>
+            <option value="水族">水族</option>
+            <option value="东乡族">东乡族</option>
+            <option value="纳西族">纳西族</option>
+            <option value="景颇族">景颇族</option>
+            <option value="柯尔克孜族">柯尔克孜族</option>
+            <option value="土族">土族</option>
+            <option value="达斡尔族">达斡尔族</option>
+            <option value="仫佬族">仫佬族</option>
+            <option value="羌族">羌族</option>
+            <option value="布朗族">布朗族</option>
+            <option value="撒拉族">撒拉族</option>
+            <option value="毛南族">毛南族</option>
+            <option value="仡佬族">仡佬族</option>
+            <option value="锡伯族">锡伯族</option>
+            <option value="阿昌族">阿昌族</option>
+            <option value="普米族">普米族</option>
+            <option value="塔吉克族">塔吉克族</option>
+            <option value="怒族">怒族</option>
+            <option value="乌孜别克族">乌孜别克族</option>
+            <option value="俄罗斯族">俄罗斯族</option>
+            <option value="鄂温克族">鄂温克族</option>
+            <option value="德昂族">德昂族</option>
+            <option value="保安族">保安族</option>
+            <option value="裕固族">裕固族</option>
+            <option value="京族">京族</option>
+            <option value="塔塔尔族">塔塔尔族</option>
+            <option value="独龙族">独龙族</option>
+            <option value="鄂伦春族">鄂伦春族</option>
+            <option value="赫哲族">赫哲族</option>
+            <option value="门巴族">门巴族</option>
+            <option value="珞巴族">珞巴族</option>
+            <option value="基诺族">基诺族</option>
           </select>
         </div>
       </div>
@@ -329,12 +293,12 @@
           <ul class="custom-radio">
             <li>
               <label for="married">未婚</label>
-              <input type="radio" name="marriage" id="married" />
+              <input type="radio" name="marriage" id="married" value="未婚"/>
               <div class="check"></div>
             </li>
             <li>
               <label for="unmarried">已婚</label>
-              <input type="radio" name="marriage" id="unmarried" />
+              <input type="radio" name="marriage" id="unmarried" value="已婚"/>
               <div class="check"></div>
             </li>
           </ul>
@@ -346,7 +310,7 @@
           <label for="career">职业</label>
         </div>
         <div class="col-sm-10">
-          <input type="text" id="career" placeholder="请输入您的职业" class="form-control">
+          <input type="text" id="career" placeholder="请输入您的职业" name="career" class="form-control">
         </div>
       </div>
 
@@ -355,7 +319,7 @@
           <label for="native-place">籍贯</label>
         </div>
         <div class="col-sm-10">
-          <input type="text" id="native-place" placeholder="请输入您的籍贯" class="form-control">
+          <input type="text" id="native-place" placeholder="请输入您的籍贯" name="native-place" class="form-control">
         </div>
       </div>
 
@@ -364,7 +328,7 @@
           <label for="obode">常住地</label>
         </div>
         <div class="col-sm-10">
-          <input type="text" id="obode" placeholder="请输入您的常住地" class="form-control">
+          <input type="text" id="obode" placeholder="请输入您的常住地" name="obode" class="form-control">
         </div>
       </div>
 
@@ -386,6 +350,186 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script type="text/javascript" src="/AlphaEye/Public/assets/js/jquery-3.2.1.min.js"></script>
+
+<script type="text/javascript" src="/AlphaEye/Public/js/common.js?t=201709172346"></script>
+<script type="text/javascript">
+
+    EventUtil.addHandler(window, "load", function (event) {
+
+
+        var createForm = document.getElementsByClassName("form-create")[0];
+        var chooseForm = document.getElementsByClassName("form-choose-type")[0];
+        var detailForm = document.getElementsByClassName("form-detail")[0];
+        var step1Tag = document.getElementById("step-one");
+        var step2Tag = document.getElementById("step-two");
+        var step3Tag = document.getElementById("step-three");
+
+        var createButton = document.getElementById("create-button");
+        var chooseButton = document.getElementById("choose-button");
+        var signUpButton = document.getElementById("sign-up-button");
+
+        var inputUserName = $("#inputUserName"), inputPassword = $("#inputPassword");
+        EventUtil.addHandler(inputUserName[0], "focus", removeWarningColorHandler);
+        EventUtil.addHandler(inputPassword[0], "focus", removeWarningColorHandler);
+        EventUtil.addHandler(createButton, "blur", removeWarningHandler);
+        EventUtil.addHandler(chooseButton, "blur", removeWarningHandler);
+//          EventUtil.addHandler(signUpButton, "blur", removeWarningHandler);
+
+        EventUtil.addHandler(createButton, "click", function (event) {
+            EventUtil.preventDefault(event);
+            var validInputConfig = true;
+            {
+                if(inputUserName.val() === ""){
+                    validInputConfig = false;
+                    addWarning(inputUserName, "用户名不能为空", "red");
+
+                }
+
+                if(inputPassword.val() === ""){
+                    validInputConfig = false;
+                    addWarning(inputPassword, "密码不能为空", "red");
+                }
+            }
+
+            if(validInputConfig){
+                var xhr = createXHR();
+                xhr.open("POST", "<?php echo ($register_view); ?>", false);
+                xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xhr.send($(createForm).serialize() + "&create-button=");
+
+                if((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304){
+                    var responseValue = parseInt(xhr.responseText);
+                    if(responseValue === 1){
+//                          alert("right");
+                        createForm.style.display = "none";
+                        chooseForm.style.display = "block";
+                        step1Tag.className = "";
+                        step2Tag.className = "current";
+                    }
+                    else {
+                        addWarning($(createButton), "用户名已存在");
+                        inputUserName.css({"border-color" : "red"});
+//                        var waringTag = $("<span></span>").text("用户名已存在");
+//                        waringTag.css({"color" : "#CC3333", "position": "absolute", "font-size" : "0.7rem"});
+//                        $(createButton).after(waringTag);
+                    }
+                }else {
+                    alert("No response from AlphaEye Server");
+                }
+            }
+        });
+
+        var typeListTags = document.getElementsByName("user-type");
+        EventUtil.addHandler(chooseButton, "click", function (event) {
+            EventUtil.preventDefault(event);
+            var chooseType = "user-option";
+            for(var i = 0; i < typeListTags.length; i++){
+                if(typeListTags[i].checked){
+                    chooseType = typeListTags[i].id;
+                }
+            }
+
+            if(chooseType === "doctor-option"){
+                addWarning($(chooseButton), "医生用户注册暂时未开放");
+            }
+            else{
+                chooseForm.style.display = "none";
+                detailForm.style.display = "block";
+                step2Tag.className = "";
+                step3Tag.className = "current";
+            }
+        });
+
+        var realName = $("#real-name"), age = $("#age"), j;
+        EventUtil.addHandler(realName[0], "focus", removeWarningColorHandler);
+        EventUtil.addHandler(age[0], "focus", removeWarningColorHandler);
+        //TODO:check the existence
+        var customListTags = detailForm.getElementsByTagName("ul");
+        var sexULTag = $(customListTags[0]), marriageULTag = $(customListTags[1]);
+
+        var sexListTags = document.getElementsByName("gender");
+        var sexValue = "";
+        for(j = 0; j < sexListTags.length; j++){
+            EventUtil.addHandler(sexListTags[j], "click", function (event) {
+                event = EventUtil.getEvent(event);
+                var target = EventUtil.getTarget(event);
+                sexValue = target.parentNode.getElementsByTagName("label")[0].innerHeight;
+                $(sexULTag).siblings("span").remove();
+            })
+        }
+        var marryListTags = document.getElementsByName("marriage");
+        var marriageValue = "";
+        for(j = 0; j < marryListTags.length; j++){
+            EventUtil.addHandler(marryListTags[j], "click", function (event) {
+                event = EventUtil.getEvent(event);
+                var target = EventUtil.getTarget(event);
+                marriageValue = target.parentNode.getElementsByTagName("label")[0].innerHeight;
+                $(marriageULTag).siblings("span").remove();
+            })
+        }
+
+        var forbidSubmit = false;
+        EventUtil.addHandler(signUpButton, "click", function (event) {
+
+            EventUtil.preventDefault(event);
+
+            if(forbidSubmit)return;
+
+            var validInputConfig = true;
+
+            {
+                if(realName.val() === ""){
+                    validInputConfig = false;
+                    addWarning(realName, "姓名不能为空", "red");
+                }
+
+                var ageValue = parseInt(age.val());
+                if(ageValue <= 0 || ageValue >= 500 || isNaN(ageValue)){
+                    validInputConfig = false;
+                    addWarning(age, "年龄值需为0-500之间的有效数字", "red");
+                }
+
+                if(sexValue === ""){
+                    validInputConfig = false;
+                    addWarning(sexULTag, "还未选择性别");
+                }
+
+                if(marriageValue === ""){
+                    validInputConfig = false;
+                    addWarning(marriageULTag, "还未选择婚配情况");
+                }
+            }
+
+            if(validInputConfig){
+                var xhr = createXHR();
+                xhr.open("POST", "<?php echo ($register_view); ?>", false);
+                xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xhr.send($(createForm).serialize() + "&" +
+                    $(chooseForm).serialize() + "&" +
+                    $(detailForm).serialize() + "&sign-up-button=");
+
+                if((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304){
+                    var responseValue = parseInt(xhr.responseText);
+                    if(responseValue === 1){
+                        window.location.href = "<?php echo ($questionnaire_view); ?>";
+                    }
+                    else {
+//                          alert("not right");
+                        addWarning($(signUpButton), "注册失败");
+                        forbidSubmit = true;
+                    }
+
+                }else {
+                    alert("No response from AlphaEye Server");
+                }
+            }
+
+
+        });
+
+    })
+</script>
 <script src="/AlphaEye/Public/assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
