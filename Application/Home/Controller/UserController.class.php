@@ -55,6 +55,7 @@ class UserController extends Controller
             }else{
                 session_start();
                 $_SESSION['name'] = $user['name'];
+                $_SESSION['gender'] = $user['gender'];
 
                 if(array_key_exists('remember', $_POST)){
                     setcookie('name', $name, time() + 2592000);
@@ -99,6 +100,7 @@ class UserController extends Controller
                 else{
                     session_start();
                     $_SESSION['name'] = $_POST['name'];
+                    $_SESSION['gender'] = $_POST['gender'];
                 }
             }
 
@@ -110,12 +112,14 @@ class UserController extends Controller
 
     public function questionnaire(){
         session_start();
-        $name = $_SESSION['name'];
-        $this->assign('name', $name);
+        $this->assign('name', $_SESSION['name']);
+        $avatar = $_SESSION['gender'] == "男" ? "avatar-male.jpg" : "avatar-female.jpg";
+        $this->assign('avatar', $avatar);
 
         if (IS_POST){
             if (array_key_exists('exist', $_POST)){
                 unset($_SESSION['name']);
+                unset($_SESSION['gender']);
             }
             return;
         }

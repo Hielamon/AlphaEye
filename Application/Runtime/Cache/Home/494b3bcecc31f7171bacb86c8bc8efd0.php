@@ -57,7 +57,7 @@
         <div class="top-nav-profile float-right">
             <div class="top-link-logo">
                 <a href="#" class="top-link-logo">
-                    <img src="/AlphaEye/Public/images/avatar2.jpg" class="avatar"/>
+                    <img src="/AlphaEye/Public/images/<?php echo ($avatar); ?>" class="avatar"/>
                     <span class="name"><?php echo ($name); ?></span>
                 </a>
             </div>

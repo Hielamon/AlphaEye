@@ -26,6 +26,7 @@ class IndexController extends Controller {
         if (IS_POST){
             if (array_key_exists('exist', $_POST)){
                 unset($_SESSION['name']);
+                unset($_SESSION['gender']);
             }
             return;
         }
