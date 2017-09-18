@@ -33,6 +33,8 @@ class IndexController extends Controller {
 
         if(array_key_exists('name', $_SESSION)){
             $this->assign('name', $_SESSION['name']);
+            $avatar = $_SESSION['gender'] == "男" ? "avatar-male.jpg" : "avatar-female.jpg";
+            $this->assign('avatar', $avatar);
         }
         $this->display();
     }

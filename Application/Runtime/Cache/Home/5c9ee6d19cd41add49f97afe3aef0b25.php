@@ -45,7 +45,7 @@
   </form>
 
   <div class="container extra-div">
-    <a href="<?php echo ($index_view); ?>">注册新账号</a>
+    <a href="<?php echo ($register_view); ?>">注册新账号</a>
   </div>
 
 </div> <!-- /container -->

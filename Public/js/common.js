@@ -45,6 +45,22 @@ var EventUtil = {
 
 };
 
+function hasClass(element, cName) {
+    return !!element.className.match(new RegExp("(\\s|^)" + cName + "(\\s|$)"));
+}
+
+function addClass(element, cName) {
+    if(!hasClass(element, cName)){
+        element.className += " " + cName;
+    }
+}
+
+function removeClass(element, cName) {
+    if(hasClass(element, cName)){
+        element.className = element.className.replace(new RegExp("(\\s|^)" + cName + "(\\s|$)"));
+    }
+}
+
 function findLableForControl(root, el) {
   var idVal = el.id;
   labels = root.getElementsByTagName('label');
@@ -136,3 +152,5 @@ function removeWarningColorHandler(event) {
     target.style.borderColor = "#80bdff";
     $(target).siblings("span").remove();
 }
+
+

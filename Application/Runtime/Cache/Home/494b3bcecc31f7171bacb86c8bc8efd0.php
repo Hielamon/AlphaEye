@@ -32,7 +32,7 @@
     <nav>
         <ul class="nav nav-pills float-left">
             <li class="nav-item">
-                <a class="nav-link active" href="#">首页 <span class="sr-only">(current)</span></a>
+                <a class="nav-link" id="index" href="<?php echo U('index/index');?>">首页</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">介绍</a>

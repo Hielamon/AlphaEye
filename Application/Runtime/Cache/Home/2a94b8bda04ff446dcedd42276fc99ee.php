@@ -29,7 +29,7 @@
     <nav>
         <ul class="nav nav-pills float-left">
             <li class="nav-item">
-                <a class="nav-link active" href="#">首页 <span class="sr-only">(current)</span></a>
+                <a class="nav-link" id="index" href="<?php echo U('index/index');?>">首页</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">介绍</a>
@@ -107,8 +107,9 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <!--load the js files-->
 <script type="text/javascript" src="/AlphaEye/Public/assets/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="/AlphaEye/Public/js/common.js"></script>
-<script src="/AlphaEye/Public/assets/js/ie10-viewport-bug-workaround.js"></script>
+<script type="text/javascript" src="/AlphaEye/Public/js/index.js?201709181314"></script>
+<script type="text/javascript" src="/AlphaEye/Public/js/common.js?201709181314"></script>
 
+<script type="text/javascript" src="/AlphaEye/Public/assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
