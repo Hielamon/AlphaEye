@@ -45,7 +45,7 @@
   </form>
 
   <div class="container extra-div">
-    <a href="<?php echo ($register_view); ?>">注册新账号</a>
+    <a href="<?php echo U('user/register');?>">注册新账号</a>
   </div>
 
 </div> <!-- /container -->
@@ -109,7 +109,7 @@
                             break;
                         //登录成功
                         case 0:
-                            window.location.href = "<?php echo ($questionnaire_view); ?>";
+                            window.location.href = "<?php echo U('MedicalRecord/questionnaire');?>";
                             break;
                         default :
                             break;

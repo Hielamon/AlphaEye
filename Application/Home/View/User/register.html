@@ -449,7 +449,7 @@
                 if((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304){
                     var responseValue = parseInt(xhr.responseText);
                     if(responseValue === 1){
-                        window.location.href = "{$questionnaire_view}";
+                        window.location.href = "{:U('MedicalRecord/questionnaire')}";
                     }
                     else {
 //                          alert("not right");

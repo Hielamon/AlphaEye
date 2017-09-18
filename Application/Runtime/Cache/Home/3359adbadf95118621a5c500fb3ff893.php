@@ -43,10 +43,10 @@
     <?php if(empty($name)): ?><nav>
             <ul class="nav float-right">
                 <li class="login">
-                    <a class="btn btn-outline-primary" href="<?php echo ($login_view); ?>">登录</a>
+                    <a class="btn btn-outline-primary" href="<?php echo U('user/login');?>">登录</a>
                 </li>
                 <li class="register">
-                    <a class="btn btn-outline-primary" href="<?php echo ($register_view); ?>">注册</a>
+                    <a class="btn btn-outline-primary" href="<?php echo U('user/register');?>">注册</a>
                 </li>
             </ul>
         </nav>
@@ -60,12 +60,12 @@
             </div>
 
             <ul class="top-nav-drop">
-                <li id="li-profile"><a href="#">个人资料</a></li>
+                <li id="li-profile"><a href="<?php echo U('user/personal_data');?>">个人资料</a></li>
                 <li id="li-medical-record"><a href="#">病历</a></li>
-                <li id="li-exit"><a href="<?php echo ($index_view); ?>">退出</a></li>
+                <li id="li-exit"><a href="<?php echo U('index/index');?>">退出</a></li>
             </ul>
         </div>
-        <script type="text/javascript" src="/AlphaEye/Public/js/common.js"></script>
+        <script type="text/javascript" src="/AlphaEye/Public/js/common.js?201709181328"></script>
         <script type="application/javascript">
             EventUtil.addHandler(window, "load", function () {
                 var existLiTag = document.getElementById("li-exit");
@@ -73,7 +73,7 @@
 
                 EventUtil.addHandler(existLinkTag, "click", function () {
                     var xhr = createXHR();
-                    xhr.open("POST", "<?php echo ($index_view); ?>", false);
+                    xhr.open("POST", "<?php echo U('index/index');?>", false);
                     xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                     xhr.send("exist=");
 
@@ -512,7 +512,7 @@
                 if((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304){
                     var responseValue = parseInt(xhr.responseText);
                     if(responseValue === 1){
-                        window.location.href = "<?php echo ($questionnaire_view); ?>";
+                        window.location.href = "<?php echo U('MedicalRecord/questionnaire');?>";
                     }
                     else {
 //                          alert("not right");

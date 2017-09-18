@@ -13,25 +13,6 @@ use Think\Model;
 
 class UserController extends Controller
 {
-    //the array to save all views' url
-    private $view_urls = array();
-
-    function __construct()
-    {
-        parent::__construct();
-        $this->view_urls['questionnaire_view'] = U("user/questionnaire");
-        $this->assign('questionnaire_view',$this->view_urls['questionnaire_view'] );
-
-        $this->view_urls['index_view'] = U("index/index");
-        $this->assign('index_view',$this->view_urls['index_view'] );
-
-        $this->view_urls['$login_view'] = U("user/login");
-        $this->assign('login_view',$this->view_urls['$login_view'] );
-
-        $this->view_urls['register_view'] = U("user/register");
-        $this->assign('register_view',$this->view_urls['register_view'] );
-    }
-
     public function login(){
         if(array_key_exists('name', $_COOKIE)){
             $name = $_COOKIE['name'];
@@ -110,7 +91,7 @@ class UserController extends Controller
         }
     }
 
-    public function questionnaire(){
+    public  function personal_data(){
         session_start();
         $this->assign('name', $_SESSION['name']);
         $avatar = $_SESSION['gender'] == "男" ? "avatar-male.jpg" : "avatar-female.jpg";
@@ -123,8 +104,7 @@ class UserController extends Controller
             }
             return;
         }
-
+        
         $this->display();
     }
-
 }

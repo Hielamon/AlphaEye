@@ -45,7 +45,7 @@
   </form>
 
   <div class="container extra-div">
-    <a href="{$register_view}">注册新账号</a>
+    <a href="{:U('user/register')}">注册新账号</a>
   </div>
 
 </div> <!-- /container -->
@@ -109,7 +109,7 @@
                             break;
                         //登录成功
                         case 0:
-                            window.location.href = "{$questionnaire_view}";
+                            window.location.href = "{:U('MedicalRecord/questionnaire')}";
                             break;
                         default :
                             break;
