@@ -20,7 +20,7 @@
 
   <!-- Custom styles for this template -->
   <link href="/AlphaEye/Public/css/common.css" rel="stylesheet" />
-  <link href="/AlphaEye/Public/css/header.css?201709162348" rel="stylesheet">
+  <link href="/AlphaEye/Public/css/header.css?201709190919" rel="stylesheet">
   <link href="/AlphaEye/Public/css/questionnaire.css?201709130257" rel="stylesheet">
 
 </head>
@@ -63,9 +63,9 @@
             </div>
 
             <ul class="top-nav-drop">
-                <li id="li-profile"><a href="<?php echo U('user/personal_data');?>">个人资料</a></li>
-                <li id="li-medical-record"><a href="#">病历</a></li>
-                <li id="li-exit"><a href="<?php echo U('index/index');?>">退出</a></li>
+                <li id="li-profile"><a href="<?php echo U('user/personal_data');?>"><div class="distract-div"></div>个人资料</a></li>
+                <li id="li-medical-record"><a href="<?php echo U('MedicalRecord/questionnaire');?>"><div class="distract-div"></div>病历</a></li>
+                <li id="li-exit"><a href="<?php echo U('index/index');?>"><div class="distract-div"></div>退出</a></li>
             </ul>
         </div>
         <script type="text/javascript" src="/AlphaEye/Public/js/common.js?201709181328"></script>

@@ -16,7 +16,7 @@
 
   <!-- Custom styles for this template -->
   <link href="/AlphaEye/Public/css/common.css?201709162348" rel="stylesheet" />
-  <link href="/AlphaEye/Public/css/login.css?201709172248" rel="stylesheet">
+  <link href="/AlphaEye/Public/css/login.css?201709190143" rel="stylesheet">
 
 </head>
 
@@ -92,7 +92,7 @@
 
             if(validInputConfig){
                 var xhr = createXHR();
-                xhr.open("POST", "<?php echo ($login_view); ?>", false);
+                xhr.open("POST", "<?php echo U('user/login');?>", false);
                 xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 xhr.send($(loginForm).serialize());
 

@@ -16,9 +16,8 @@
 
   <!-- Custom styles for this template -->
   <link href="/AlphaEye/Public/css/common.css?201709162348" rel="stylesheet">
-  <link href="/AlphaEye/Public/css/header.css?201709162348" rel="stylesheet">
+  <link href="/AlphaEye/Public/css/header.css?201709190919" rel="stylesheet">
   <link href="/AlphaEye/Public/css/index.css?201709170034" rel="stylesheet">
-
 
 </head>
 <body>
@@ -43,10 +42,10 @@
     <?php if(empty($name)): ?><nav>
             <ul class="nav float-right">
                 <li class="login">
-                    <a class="btn btn-outline-primary" href="<?php echo ($login_view); ?>">登录</a>
+                    <a class="btn btn-outline-primary" href="<?php echo U('user/login');?>">登录</a>
                 </li>
                 <li class="register">
-                    <a class="btn btn-outline-primary" href="<?php echo ($register_view); ?>">注册</a>
+                    <a class="btn btn-outline-primary" href="<?php echo U('user/register');?>">注册</a>
                 </li>
             </ul>
         </nav>
@@ -60,12 +59,12 @@
             </div>
 
             <ul class="top-nav-drop">
-                <li id="li-profile"><a href="#">个人资料</a></li>
-                <li id="li-medical-record"><a href="#">病历</a></li>
-                <li id="li-exit"><a href="<?php echo ($index_view); ?>">退出</a></li>
+                <li id="li-profile"><a href="<?php echo U('user/personal_data');?>"><div class="distract-div"></div>个人资料</a></li>
+                <li id="li-medical-record"><a href="<?php echo U('MedicalRecord/questionnaire');?>"><div class="distract-div"></div>病历</a></li>
+                <li id="li-exit"><a href="<?php echo U('index/index');?>"><div class="distract-div"></div>退出</a></li>
             </ul>
         </div>
-        <script type="text/javascript" src="/AlphaEye/Public/js/common.js"></script>
+        <script type="text/javascript" src="/AlphaEye/Public/js/common.js?201709181328"></script>
         <script type="application/javascript">
             EventUtil.addHandler(window, "load", function () {
                 var existLiTag = document.getElementById("li-exit");
@@ -73,7 +72,7 @@
 
                 EventUtil.addHandler(existLinkTag, "click", function () {
                     var xhr = createXHR();
-                    xhr.open("POST", "<?php echo ($index_view); ?>", false);
+                    xhr.open("POST", "<?php echo U('index/index');?>", false);
                     xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                     xhr.send("exist=");
 
@@ -107,9 +106,12 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <!--load the js files-->
 <script type="text/javascript" src="/AlphaEye/Public/assets/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="/AlphaEye/Public/js/index.js?201709181314"></script>
-<script type="text/javascript" src="/AlphaEye/Public/js/common.js?201709181314"></script>
-
+<script type="text/javascript" src="/AlphaEye/Public/js/common.js?201709181340"></script>
 <script type="text/javascript" src="/AlphaEye/Public/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+<script type="text/javascript">
+    var indexPinTag = document.getElementById("index");
+    addClass(indexPinTag, "active");
+</script>
 </body>
 </html>

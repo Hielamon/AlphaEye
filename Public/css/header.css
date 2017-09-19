@@ -48,6 +48,7 @@ a.top-link-logo{
 
 ul.top-nav-drop{
     display: none;
+    position: absolute;
     list-style: none;
     margin: 0;
     padding:0;
@@ -57,8 +58,19 @@ ul.top-nav-drop li{
     border-bottom:1px solid #ddd;
     /*margin-bottom:-1px;*/
     padding-top: 0.6rem;
-    padding-left: 3.2rem;
+    padding-left: 0;
     height: 2.9rem;
+}
+
+ul.top-nav-drop li a{
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.distract-div{
+    width: 3.2rem;
+    height: 2rem;
+    float: left;
 }
 
 ul.top-nav-drop li:last-child{
@@ -118,7 +130,7 @@ div.top-nav-profile:hover div.top-link-logo{
 div.top-nav-profile:hover ul.top-nav-drop{
     display: block;
     width: 100%;
-    position: absolute;
+
     border: 1px solid #ddd;
     background-color: #f9f9f9;
     -webkit-border-radius: 0.5rem;

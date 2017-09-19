@@ -1,0 +1,40 @@
+.portrait{
+    position: relative;
+    width: 167px;
+    height: 167px;
+    border: 1px solid #6c757d;
+    -webkit-border-radius: 2%;
+    -moz-border-radius: 2%;
+    border-radius: 2%;
+    padding: 4px 4px;
+}
+
+.portrait span{
+    display: block;
+    position: absolute;
+    top: 170px;
+    left: 0;
+    font-size: 1.5rem;
+    font-family: Fantasy,Times,Serif;
+}
+
+.portrait img{
+    width: 100%;
+    height: 100%;
+}
+
+.personal-details{
+    width: 700px;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.col-sm-2{
+    text-align: right;
+    max-width: 12%;
+    flex: 0 0 12%;
+}
+
+.row{
+    margin-bottom: 0.5rem;
+}

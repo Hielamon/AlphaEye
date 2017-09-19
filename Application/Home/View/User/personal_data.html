@@ -15,15 +15,51 @@
 
     <!-- Custom styles for this template -->
     <link href="__PUBLIC__/css/common.css?201709162348" rel="stylesheet" />
-    <link href="__PUBLIC__/css/header.css?201709162348" rel="stylesheet" />
-    <link href="__PUBLIC__/css/personal_data.css?201709172248" rel="stylesheet">
+    <link href="__PUBLIC__/css/header.css?201709190919" rel="stylesheet" />
+    <link href="__PUBLIC__/css/personal_data.css?201709190135" rel="stylesheet">
 
 </head>
 
 <body>
 
-<div class="container">
+<div class="container clearfix">
     <include file="Public:header" />
+
+    <div class="portrait float-left">
+        <img src="__PUBLIC__/images/{$portrait_name}">
+        <span>{$name}</span>
+    </div>
+
+    <div class="personal-details float-left">
+        <div class="row">
+            <div class="col-sm-2 ">姓名:</div>
+            <div class="col-sm-3">{$user['real-name']}</div>
+            <div class="col-sm-2">性别:</div>
+            <div class="col-sm-3">{$user['gender']}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 ">年龄:</div>
+            <div class="col-sm-3">{$user['age']}</div>
+            <div class="col-sm-2">民族:</div>
+            <div class="col-sm-3">{$user['ethnic']}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 ">婚配:</div>
+            <div class="col-sm-3">{$user['marriage']}</div>
+            <div class="col-sm-2">职业:</div>
+            <div class="col-sm-3">{$user['career']}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 ">籍贯:</div>
+            <div class="col-sm-3">{$user['native-place']}</div>
+            <div class="col-sm-2">常住地:</div>
+            <div class="col-sm-3">{$user['obode']}</div>
+        </div>
+
+    </div>
 </div> <!-- /container -->
 
 
@@ -36,6 +72,11 @@
 <script type="text/javascript" src="__PUBLIC__/js/common.js?201709180009"></script>
 
 <script type="text/javascript">
+    var portraitDivTag = document.getElementsByClassName("portrait")[0];
+    var nameSpanTag = portraitDivTag.getElementsByTagName("span")[0];
+    var portraitDivWidth = parseFloat($(portraitDivTag).css("width"));
+    var nameSpanWidth = parseFloat($(nameSpanTag).css("width"));
+    nameSpanTag.style.marginLeft = ((portraitDivWidth - nameSpanWidth)*0.5 + "px");
 </script>
 </body>
 </html>

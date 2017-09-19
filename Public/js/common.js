@@ -120,6 +120,9 @@ function addWarningInner(node, text, align) {
     var paddingLeft = parseFloat(node.css("padding-left"));
     var paddingTop = parseFloat(node.css("padding-top"));
     var borderWidth = parseFloat(node.css("border-width"));
+    if(isNaN(borderWidth)){
+        borderWidth = 0;
+    }
 
     var leftDistant = paddingLeft;
     leftDistant += borderWidth;
@@ -136,8 +139,9 @@ function addWarningInner(node, text, align) {
     waringWidth -= (2 * paddingLeft);
     waringTag.css("width", (waringWidth + "px"));
 
-    waringTag[0].style.left = (leftDistant + "px");
-    waringTag[0].style.top = (topDistant + "px");
+    waringTag.css("left", (leftDistant + "px"));
+    waringTag.css("top", (topDistant + "px"));
+
     node.after(waringTag);
 }
 

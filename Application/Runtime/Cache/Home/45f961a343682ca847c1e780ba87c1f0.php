@@ -15,14 +15,14 @@
 
     <!-- Custom styles for this template -->
     <link href="/AlphaEye/Public/css/common.css?201709162348" rel="stylesheet" />
-    <link href="/AlphaEye/Public/css/header.css?201709162348" rel="stylesheet" />
-    <link href="/AlphaEye/Public/css/personal_data.css?201709172248" rel="stylesheet">
+    <link href="/AlphaEye/Public/css/header.css?201709190919" rel="stylesheet" />
+    <link href="/AlphaEye/Public/css/personal_data.css?201709190135" rel="stylesheet">
 
 </head>
 
 <body>
 
-<div class="container">
+<div class="container clearfix">
     <div class="header clearfix">
     <h4 class="text-muted float-left">AlphaEye</h4>
     <nav>
@@ -59,9 +59,9 @@
             </div>
 
             <ul class="top-nav-drop">
-                <li id="li-profile"><a href="<?php echo U('user/personal_data');?>">个人资料</a></li>
-                <li id="li-medical-record"><a href="#">病历</a></li>
-                <li id="li-exit"><a href="<?php echo U('index/index');?>">退出</a></li>
+                <li id="li-profile"><a href="<?php echo U('user/personal_data');?>"><div class="distract-div"></div>个人资料</a></li>
+                <li id="li-medical-record"><a href="#"><div class="distract-div"></div>病历</a></li>
+                <li id="li-exit"><a href="<?php echo U('index/index');?>"><div class="distract-div"></div>退出</a></li>
             </ul>
         </div>
         <script type="text/javascript" src="/AlphaEye/Public/js/common.js?201709181328"></script>
@@ -87,6 +87,42 @@
 </div><!-- navigator -->
 
 
+
+    <div class="portrait float-left">
+        <img src="/AlphaEye/Public/images/<?php echo ($portrait_name); ?>">
+        <span><?php echo ($name); ?></span>
+    </div>
+
+    <div class="personal-details float-left">
+        <div class="row">
+            <div class="col-sm-2 ">姓名:</div>
+            <div class="col-sm-3"><?php echo ($user['real-name']); ?></div>
+            <div class="col-sm-2">性别:</div>
+            <div class="col-sm-3"><?php echo ($user['gender']); ?></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 ">年龄:</div>
+            <div class="col-sm-3"><?php echo ($user['age']); ?></div>
+            <div class="col-sm-2">民族:</div>
+            <div class="col-sm-3"><?php echo ($user['ethnic']); ?></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 ">婚配:</div>
+            <div class="col-sm-3"><?php echo ($user['marriage']); ?></div>
+            <div class="col-sm-2">职业:</div>
+            <div class="col-sm-3"><?php echo ($user['career']); ?></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 ">籍贯:</div>
+            <div class="col-sm-3"><?php echo ($user['native-place']); ?></div>
+            <div class="col-sm-2">常住地:</div>
+            <div class="col-sm-3"><?php echo ($user['obode']); ?></div>
+        </div>
+
+    </div>
 </div> <!-- /container -->
 
 
@@ -99,6 +135,11 @@
 <script type="text/javascript" src="/AlphaEye/Public/js/common.js?201709180009"></script>
 
 <script type="text/javascript">
+    var portraitDivTag = document.getElementsByClassName("portrait")[0];
+    var nameSpanTag = portraitDivTag.getElementsByTagName("span")[0];
+    var portraitDivWidth = parseFloat($(portraitDivTag).css("width"));
+    var nameSpanWidth = parseFloat($(nameSpanTag).css("width"));
+    nameSpanTag.style.marginLeft = ((portraitDivWidth - nameSpanWidth)*0.5 + "px");
 </script>
 </body>
 </html>
