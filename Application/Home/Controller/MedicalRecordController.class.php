@@ -19,10 +19,31 @@ class MedicalRecordController extends Controller
             if (array_key_exists('exist', $_POST)){
                 unset($_SESSION['name']);
                 unset($_SESSION['gender']);
+                return;
             }
-            return;
-        }
 
+            if(array_key_exists('check-list', $_POST)){
+                $general_user_model = new Model('general_user');
+                $return_value = 0;
+
+                $name = $_SESSION['name'];
+                $condition['name'] = $name;
+                $user = $general_user_model->where($condition)->find();
+                if(!empty($user)){
+                    $user['check-list'] = $_POST['check-list'];
+                    $general_user_model->save($user);
+                    $return_value = 1;
+                }
+
+                echo $return_value;
+            }
+        }else{
+            $this->display();
+        }
+    }
+
+    public function record(){
+        $this->setPortrait();
         $this->display();
     }
 

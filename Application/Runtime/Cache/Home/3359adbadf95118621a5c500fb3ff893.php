@@ -394,7 +394,7 @@
 
             if(validInputConfig){
                 var xhr = createXHR();
-                xhr.open("POST", "<?php echo ($register_view); ?>", false);
+                xhr.open("POST", "<?php echo U('user/register');?>", false);
                 xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 xhr.send($(createForm).serialize() + "&create-button=");
 
@@ -503,7 +503,7 @@
 
             if(validInputConfig){
                 var xhr = createXHR();
-                xhr.open("POST", "<?php echo ($register_view); ?>", false);
+                xhr.open("POST", "<?php echo U('user/register');?>", false);
                 xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 xhr.send($(createForm).serialize() + "&" +
                     $(chooseForm).serialize() + "&" +

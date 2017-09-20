@@ -172,7 +172,7 @@
 
     var currentQADivTag = null, controllerDivTag = null, currentQATitleTag = null;
 
-    var previousButtonTag = null, nextButtonTag = null, submitDiv = null;
+    var previousButtonTag = null, nextButtonTag = null, submitButtonTag = null, submitDiv = null;
     var warningOption = null, warningControl = null;
 
     function findNextQANode(currentNode, idxChoose) {
@@ -206,9 +206,9 @@
         idx = parseInt(idx);
 
         currentQANode.asked = true;
-        if(currentQANode.checkIdx !== -1){
-            submitDiv.style.display = "none";
-        }
+//        if(currentQANode.checkIdx !== -1){
+//            submitDiv.style.display = "none";
+//        }
         currentQANode.checkIdx = idx;
 
         warningOption.style.visibility = "hidden";
@@ -251,6 +251,7 @@
 
                 labelTags[i].innerHTML = QANode.options[i];
                 labelTags[i].style.display = "inline-block";
+                $(inputTags[i]).parent().show();
             }
         }
 
@@ -296,11 +297,11 @@
         }
         EventUtil.addHandler(startATag, "click", clickStartHandler);
 
-        previousButtonTag = document.getElementById("previous-button");
         warningOption = document.getElementById("warning-option");
         warningControl = document.getElementById("warning-control");
         submitDiv = document.getElementById("submit-div");
 
+        previousButtonTag = document.getElementById("previous-button");
         EventUtil.addHandler(previousButtonTag, "click", function () {
             warningOption.style.visibility = "hidden";
 
@@ -320,6 +321,7 @@
         EventUtil.addHandler(nextButtonTag, "click", function () {
             warningControl.style.visibility = "hidden";
             if(currentQANode.checkIdx === -1){
+                warningOption.innerHTML = "*您还没有选择过当前问题*";
                 warningOption.style.visibility = "visible";
             }
             else {
@@ -338,6 +340,51 @@
 
         });
 
+        submitButtonTag = document.getElementById("submit-button");
+        EventUtil.addHandler(submitButtonTag, "click", function () {
+//            EventUtil.preventDefault(event);
+            var validInputConfig = true;
+            warningControl.style.visibility = "hidden";
+
+            var nextQANode = currentQANode;
+            var nextCheckList = "";
+            while(nextQANode !== null && nextQANode.checkIdx !== -1){
+                nextCheckList += nextQANode.checkIdx.toString();
+                nextQANode = findNextQANode(nextQANode, nextQANode.checkIdx);
+            }
+
+            if (nextQANode !== null) {
+                warningOption.innerHTML = "*您还未完成所有问题*";
+                warningOption.style.visibility = "visible";
+                validInputConfig = false;
+            }
+
+            if (validInputConfig){
+                var preCheckList = "";
+                for(var i = 0; i < stackQANode.length; i++){
+                    preCheckList += stackQANode[i].checkIdx.toString();
+                }
+                var checkList = preCheckList + nextCheckList;
+
+                var xhr = createXHR();
+                xhr.open("POST", "<?php echo U('MedicalRecord/questionnaire');?>", false);
+                xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xhr.send("check-list="+checkList);
+
+                if((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304){
+                    var responseValue = parseInt(xhr.responseText);
+                    if(responseValue === 1){
+                        window.location.href = "<?php echo U('MedicalRecord/record');?>";
+                    }
+                    else {
+                        alert("Something goes wrong on AlphaEye Server");
+                    }
+                }else {
+                    alert("No response from AlphaEye Server");
+                }
+            }
+
+        })
     })
 
 </script>

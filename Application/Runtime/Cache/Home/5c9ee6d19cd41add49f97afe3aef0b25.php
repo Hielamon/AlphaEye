@@ -63,11 +63,6 @@
     EventUtil.addHandler(window, "load", function (event) {
         var submitButtons = document.getElementById("submit-button");
 
-        var jump = function (event) {
-            EventUtil.preventDefault(event);
-            window.location.href = "<?php echo ($questionnaire_view); ?>";
-        };
-
         var loginForm = document.getElementsByClassName("form-login")[0];
         var inputUserName = $("#inputUserName"), inputPassword = $("#inputPassword");
         EventUtil.addHandler(inputUserName[0], "focus", removeWarningColorHandler);
