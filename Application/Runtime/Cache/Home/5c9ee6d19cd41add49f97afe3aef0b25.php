@@ -16,7 +16,7 @@
 
   <!-- Custom styles for this template -->
   <link href="/AlphaEye/Public/css/common.css?201709162348" rel="stylesheet" />
-  <link href="/AlphaEye/Public/css/login.css?201709190143" rel="stylesheet">
+  <link href="/AlphaEye/Public/css/login.css?201709301224" rel="stylesheet">
 
 </head>
 
@@ -46,6 +46,8 @@
 
   <div class="container extra-div">
     <a href="<?php echo U('user/register');?>">注册新账号</a>
+    <span class="dotted">|</span>
+    <a href="<?php echo U('user/retrieve_password');?>">忘记密码</a>
   </div>
 
 </div> <!-- /container -->

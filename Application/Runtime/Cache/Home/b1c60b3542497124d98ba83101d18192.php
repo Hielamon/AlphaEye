@@ -1,25 +1,24 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="__PUBLIC__/assets/icon/alpha-eye.ico">
+  <link rel="icon" href="/AlphaEye/Public/assets/icon/alpha-eye.ico">
 
-  <title>AlphaEye登录</title>
+  <title>密码找回</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="__PUBLIC__/assets/css/bootstrap.min.css" rel="stylesheet">
-  <!--<link href="__PUBLIC__/assets/css/bootstrap.css" rel="stylesheet">-->
+  <link href="/AlphaEye/Public/assets/css/bootstrap.min.css" rel="stylesheet">
+  <!--<link href="/AlphaEye/Public/assets/css/bootstrap.css" rel="stylesheet">-->
   <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
 
   <!-- Custom styles for this template -->
-  <link href="__PUBLIC__/css/common.css?201709162348" rel="stylesheet" />
-  <link href="__PUBLIC__/css/login.css?201709301224" rel="stylesheet">
+  <link href="/AlphaEye/Public/css/common.css?201709162348" rel="stylesheet" />
+  <link href="/AlphaEye/Public/css/retrieve_password.css?201709301224" rel="stylesheet">
 
 </head>
-
 <body>
 
 <div class="container">
@@ -28,7 +27,7 @@
     <h2 class="form-login-heading">AlphaEye</h2>
     <div class="input-div">
       <label for="inputUserName" class="sr-only">用户名</label>
-      <input type="text" id="inputUserName" class="form-control" placeholder="用户名" name="name" value="{$name}" required autofocus>
+      <input type="text" id="inputUserName" class="form-control" placeholder="用户名" name="name" value="<?php echo ($name); ?>" required autofocus>
     </div>
 
     <div class="input-div">
@@ -45,9 +44,9 @@
   </form>
 
   <div class="container extra-div">
-    <a href="{:U('user/register')}">注册新账号</a>
+    <a href="<?php echo U('user/register');?>">注册新账号</a>
     <span class="dotted">|</span>
-    <a href="{:U('user/retrieve_password')}">忘记密码</a>
+    <a href="<?php echo U('user/retrieve_password');?>">忘记密码</a>
   </div>
 
 </div> <!-- /container -->
@@ -57,9 +56,9 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="__PUBLIC__/assets/js/ie10-viewport-bug-workaround.js"></script>
-<script type="text/javascript" src="__PUBLIC__/assets/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/common.js?201709180009"></script>
+<script src="/AlphaEye/Public/assets/js/ie10-viewport-bug-workaround.js"></script>
+<script type="text/javascript" src="/AlphaEye/Public/assets/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/AlphaEye/Public/js/common.js?201709180009"></script>
 
 <script type="text/javascript">
     EventUtil.addHandler(window, "load", function (event) {
@@ -89,7 +88,7 @@
 
             if(validInputConfig){
                 var xhr = createXHR();
-                xhr.open("POST", "{:U('user/login')}", false);
+                xhr.open("POST", "<?php echo U('user/login');?>", false);
                 xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 xhr.send($(loginForm).serialize());
 
@@ -106,7 +105,7 @@
                             break;
                         //登录成功
                         case 0:
-                            window.location.href = "{:U('MedicalRecord/questionnaire')}";
+                            window.location.href = "<?php echo U('MedicalRecord/questionnaire');?>";
                             break;
                         default :
                             break;
