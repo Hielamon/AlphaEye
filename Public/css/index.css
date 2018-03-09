@@ -1,14 +1,11 @@
 .footer {
-  padding-right: 1rem;
-  padding-left: 1rem;
-  width: 100%;
-}
-
-.footer {
+  padding-right: 0rem;
+  padding-left: 0rem;
   padding-top: 1.5rem;
   color: #777;
   border-top: .05rem solid #e5e5e5;
   text-align: center;
+  width: 100%;
 }
 
 .jumbotron {

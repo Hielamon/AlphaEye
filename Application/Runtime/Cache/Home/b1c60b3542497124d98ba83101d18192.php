@@ -16,39 +16,133 @@
 
   <!-- Custom styles for this template -->
   <link href="/AlphaEye/Public/css/common.css?201709162348" rel="stylesheet" />
-  <link href="/AlphaEye/Public/css/retrieve_password.css?201709301224" rel="stylesheet">
+  <link href="/AlphaEye/Public/css/header.css?201710191453" rel="stylesheet">
+  <link href="/AlphaEye/Public/css/retrieve_password.css?201709301330" rel="stylesheet">
+
 
 </head>
 <body>
 
 <div class="container">
+  <div class="header clearfix">
+    <h4 class="text-muted float-left"><a href="<?php echo U('index/index');?>">AlphaEye</a></h4>
+    <nav>
+        <ul class="nav nav-pills float-left">
+            <li class="nav-item">
+                <a class="nav-link" id="index" href="<?php echo U('index/index');?>">首页</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">介绍</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">联系我们</a>
+            </li>
+        </ul>
+    </nav>
 
-  <form class="form-login">
-    <h2 class="form-login-heading">AlphaEye</h2>
-    <div class="input-div">
-      <label for="inputUserName" class="sr-only">用户名</label>
-      <input type="text" id="inputUserName" class="form-control" placeholder="用户名" name="name" value="<?php echo ($name); ?>" required autofocus>
-    </div>
+    <?php if(empty($name)): ?><nav>
+            <ul class="nav float-right">
+                <li class="login">
+                    <a class="btn btn-outline-primary" href="<?php echo U('user/login');?>">登录</a>
+                </li>
+                <li class="register">
+                    <a class="btn btn-outline-primary" href="<?php echo U('user/register');?>">注册</a>
+                </li>
+            </ul>
+        </nav>
+    <?php else: ?>
+        <div class="top-nav-profile float-right">
+            <div class="top-link-logo">
+                <a href="#" class="top-link-logo">
+                    <img src="/AlphaEye/Public/images/<?php echo ($avatar); ?>" class="avatar"/>
+                    <span class="name"><?php echo ($name); ?></span>
+                </a>
+            </div>
 
-    <div class="input-div">
-      <label for="inputPassword" class="sr-only">密码</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="密码" name="password" required>
-    </div>
+            <ul class="top-nav-drop">
+                <li id="li-profile"><a href="<?php echo U('user/personal_data');?>"><div class="distract-div"></div>个人资料</a></li>
+                <li id="li-medical-record"><a href="<?php echo U('MedicalRecord/questionnaire');?>"><div class="distract-div"></div>病历</a></li>
+                <li id="li-exit"><a href="<?php echo U('index/index');?>"><div class="distract-div"></div>退出</a></li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="/AlphaEye/Public/js/common.js?201709181328"></script>
+        <script type="application/javascript">
+            EventUtil.addHandler(window, "load", function () {
+                var existLiTag = document.getElementById("li-exit");
+                var existLinkTag = existLiTag.getElementsByTagName("a")[0];
 
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" name="remember" value="remember-me"> 记住用户名
-      </label>
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" id="submit-button" type="submit">登录</button>
-  </form>
+                EventUtil.addHandler(existLinkTag, "click", function () {
+                    var xhr = createXHR();
+                    xhr.open("POST", "<?php echo U('index/index');?>", false);
+                    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    xhr.send("exist=");
 
-  <div class="container extra-div">
-    <a href="<?php echo U('user/register');?>">注册新账号</a>
-    <span class="dotted">|</span>
-    <a href="<?php echo U('user/retrieve_password');?>">忘记密码</a>
+                    if((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304){
+                    }else {
+                        alert("No response from AlphaEye Server");
+                    }
+                })
+            })
+        </script><?php endif; ?>
+
+</div><!-- navigator -->
+
+
+  <div  class="container div-retrieve">
+    <h3>通过手机号和用户名找回密码</h3>
+    <form class="form-retrieve">
+      <div class="row">
+        <div class="col-sm-2">
+          <label for="inputUserName">用户名</label>
+        </div>
+        <div class="col-sm-10">
+          <input id="inputUserName" class="form-control"  placeholder="请输入用户名" name="name" required autofocus>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-2">
+          <label for="phoneNumber">手机号</label>
+        </div>
+        <div class="col-sm-10">
+          <input id="phoneNumber" class="form-control"  placeholder="请输入手机号" name="phone-number" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-2">
+          <label for="securityCode">验证码</label>
+        </div>
+        <div class="col-sm-5">
+          <input id="securityCode" class="form-control" name="security-code" required>
+        </div>
+        <div class="col-sm-5">
+          <button class="btn btn-success btn-block" id="require-button" type="submit" name="require-button" value="label">
+            获取验证码
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-2">
+          <label for="inputPassword">新密码</label>
+        </div>
+        <div class="col-sm-10">
+          <input type="password" id="inputPassword" class="form-control" placeholder="请设置新密码" name="password" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-10">
+          <button class="btn btn-lg btn-primary btn-block" id="create-button" type="submit" name="create-button" value="label">
+            确定
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
-
 </div> <!-- /container -->
 
 

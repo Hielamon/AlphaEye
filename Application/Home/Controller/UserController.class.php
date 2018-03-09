@@ -16,7 +16,6 @@ require_once(APP_PATH.'Home/Common/functions.php');
 class UserController extends Controller
 {
 
-
     public function login(){
         if(array_key_exists('name', $_COOKIE)){
             $name = $_COOKIE['name'];
@@ -97,7 +96,7 @@ class UserController extends Controller
     }
 
     public function personal_data(){
-        $this->setPortrait();
+        if(!($this->setPortrait())) return;
 
         $general_user_model = new Model('general_user');
 
@@ -108,14 +107,10 @@ class UserController extends Controller
             $this->assign('user', $user);
         }
 
-        if (IS_POST){
-            if (array_key_exists('exist', $_POST)){
-                unset($_SESSION['name']);
-                unset($_SESSION['gender']);
-            }
-            return;
-        }
-        
+        $this->display();
+    }
+
+    public function retrieve_password(){
         $this->display();
     }
 
@@ -132,5 +127,15 @@ class UserController extends Controller
         }
         $this->assign('avatar', $avatar);
         $this->assign('portrait_name', $portrait_name);
+
+        if (IS_POST){
+            if (array_key_exists('exist', $_POST)){
+                unset($_SESSION['name']);
+                unset($_SESSION['gender']);
+            }
+            return false;
+        }
+
+        return true;
     }
 }

@@ -13,15 +13,9 @@ use Think\Model;
 class MedicalRecordController extends Controller
 {
     public function questionnaire(){
-        $this->setPortrait();
+        if(!($this->setPortrait())) return;
 
         if (IS_POST){
-            if (array_key_exists('exist', $_POST)){
-                unset($_SESSION['name']);
-                unset($_SESSION['gender']);
-                return;
-            }
-
             if(array_key_exists('check-list', $_POST)){
                 $general_user_model = new Model('general_user');
                 $return_value = 0;
@@ -43,7 +37,7 @@ class MedicalRecordController extends Controller
     }
 
     public function record(){
-        $this->setPortrait();
+        if(!($this->setPortrait())) return;
         $this->display();
     }
 
@@ -60,5 +54,15 @@ class MedicalRecordController extends Controller
         }
         $this->assign('avatar', $avatar);
         $this->assign('portrait_name', $portrait_name);
+
+        if (IS_POST){
+            if (array_key_exists('exist', $_POST)){
+                unset($_SESSION['name']);
+                unset($_SESSION['gender']);
+                return false;
+            }
+        }
+
+        return true;
     }
 }

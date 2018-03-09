@@ -24,7 +24,7 @@
 
 <div class="container clearfix">
     <div class="header clearfix">
-    <h4 class="text-muted float-left">AlphaEye</h4>
+    <h4 class="text-muted float-left"><a href="<?php echo U('index/index');?>">AlphaEye</a></h4>
     <nav>
         <ul class="nav nav-pills float-left">
             <li class="nav-item">

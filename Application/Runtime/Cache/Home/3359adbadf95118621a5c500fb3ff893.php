@@ -20,22 +20,21 @@
   <link href="/AlphaEye/Public/css/register.css" rel="stylesheet">
 
 </head>
-
 <body>
 
 <div class="container">
   <div class="header clearfix">
-    <h4 class="text-muted float-left">AlphaEye</h4>
+    <h4 class="text-muted float-left"><a href="<?php echo U('index/index');?>">AlphaEye</a></h4>
     <nav>
         <ul class="nav nav-pills float-left">
             <li class="nav-item">
                 <a class="nav-link" id="index" href="<?php echo U('index/index');?>">首页</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">介绍</a>
+                <a class="nav-link" id="intro" href="<?php echo U('index/introduction');?>">介绍</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">联系我们</a>
+                <a class="nav-link" id="contact" href="<?php echo U('index/contact');?>">联系我们</a>
             </li>
         </ul>
     </nav>

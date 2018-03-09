@@ -16,25 +16,25 @@
 
   <!-- Custom styles for this template -->
   <link href="/AlphaEye/Public/css/common.css?201709162348" rel="stylesheet">
-  <link href="/AlphaEye/Public/css/header.css?201709190919" rel="stylesheet">
-  <link href="/AlphaEye/Public/css/index.css?201709170034" rel="stylesheet">
+  <link href="/AlphaEye/Public/css/header.css?201710191443" rel="stylesheet">
+  <link href="/AlphaEye/Public/css/index.css?201801031521" rel="stylesheet">
 
 </head>
 <body>
 
 <div class="container">
   <div class="header clearfix">
-    <h4 class="text-muted float-left">AlphaEye</h4>
+    <h4 class="text-muted float-left"><a href="<?php echo U('index/index');?>">AlphaEye</a></h4>
     <nav>
         <ul class="nav nav-pills float-left">
             <li class="nav-item">
                 <a class="nav-link" id="index" href="<?php echo U('index/index');?>">首页</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">介绍</a>
+                <a class="nav-link" id="intro" href="<?php echo U('index/introduction');?>">介绍</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">联系我们</a>
+                <a class="nav-link" id="contact" href="<?php echo U('index/contact');?>">联系我们</a>
             </li>
         </ul>
     </nav>
@@ -90,7 +90,7 @@
 
   <div class="jumbotron">
     <h2 >AlphaEye数据采集平台</h2>
-    <p class="lead">本网站用于采集患者的眼表疾病数据。患者填写症状问卷后，可以查看初步的诊断结果。</p>
+    <p class="lead" style="margin-top: 1rem;">本网站暂时只用于，采集AlphaEye项目中所需患者的眼表疾病数据。<br />患者填写症状问卷后，可以查看初步的诊断结果。</p>
     <p style="visibility: hidden;"><a class="btn btn-lg btn-success" href="#" role="button">Getting Start</a></p>
   </div>
 
@@ -103,7 +103,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!-- IE10 viewport hack forindex.html Surface/desktop Windows 8 bug -->
 <!--load the js files-->
 <script type="text/javascript" src="/AlphaEye/Public/assets/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/AlphaEye/Public/js/common.js?201709181340"></script>
