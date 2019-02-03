@@ -31,10 +31,10 @@
                 <a class="nav-link" id="index" href="<?php echo U('index/index');?>">首页</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">介绍</a>
+                <a class="nav-link" id="intro" href="<?php echo U('index/introduction');?>">介绍</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">联系我们</a>
+                <a class="nav-link" id="contact" href="<?php echo U('index/contact');?>">联系我们</a>
             </li>
         </ul>
     </nav>
